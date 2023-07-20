@@ -1,2 +1,4 @@
 # practSwift
-Как можно работать с таблицами в MySQL на Swift
+Простой Web Server на Swift
+
+Работает в XCode 15. Запустить отладку, открыть страницу: http://localhost:4000
