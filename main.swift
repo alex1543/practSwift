@@ -30,7 +30,7 @@ listen(sock, 5)
 print("Server listening on port \(portNumber)")
 repeat {
   let client = accept(sock, nil, nil)
-  let html = GetHTML(filename: "select.html")
+  let html = GetHTML(fname: "select.html")
   let httpResponse: String = """
     HTTP/1.1 200 OK
     server: simple-swift-server
@@ -44,15 +44,18 @@ repeat {
   }
 } while sock > -1
 
-func GetHTML(filename: String) -> String {
-  var text="12345"
-  print("Reading file...")
+func GetHTML(fname: String) -> String {
 
-  let url = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-  let fileURL = URL(fileURLWithPath: url.path + "/" + filename)
-  print(fileURL)
-  do {
-  text = try String(contentsOf: fileURL, encoding: .utf8)
-  } catch {}
+  let path = FileManager.default.currentDirectoryPath + "/" + fname
+  print("Reading file..." + path)
+
+  var text=""
+  let file = freopen(path, "r", stdin)
+  while let line = readLine() {
+    print(line)
+    text+=line
+  }
+  fclose(file)
+
   return text
 }
